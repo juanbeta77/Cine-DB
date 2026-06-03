@@ -1,7 +1,8 @@
 from conexion import db
+from datetime import datetime
 
-entradas = db["entradas"]
-funciones = db["funciones"]
+entradas = db["Entradas"]
+funciones = db["Funciones"]
 
 
 def comprar_entrada():
@@ -27,10 +28,26 @@ def comprar_entrada():
                 "pelicula": pelicula,
                 "horario": horario,
                 "cantidad": cantidad,
-                "total": total
+                "total": total,
+                "fecha_compra": datetime.now()
             }
 
-            entradas.insert_one(entrada)
+            entradas.insert_one(entrada)  
+            usuarios = db["usuarios"]
+
+            usuarios.update_one(
+                {"nombre": usuario},
+                {
+                    "$push": {
+                        "historial_compras": {
+                            "pelicula": pelicula,
+                            "cantidad": cantidad,
+                            "total": total,
+                            "fecha": datetime.now()
+                        }
+                    }
+                }
+            )
 
             nuevos_asientos = funcion["asientos_disponibles"] - cantidad
 
@@ -46,6 +63,20 @@ def comprar_entrada():
                 }
             )
 
+
+
+
+            print(f"""
+======== RECIBO ========
+
+Usuario: {usuario}
+Pelicula: {pelicula}
+Horario: {horario}
+Cantidad entradas: {cantidad}
+Total pagado: {total}
+
+========================
+""")
             print(f"""
 Compra realizada correctamente
 Total pagado: {total}
@@ -71,3 +102,12 @@ Horario: {entrada['horario']}
 Cantidad: {entrada['cantidad']}
 Total: {entrada['total']}
 """)
+        
+def total_ventas():
+
+    total = 0
+
+    for entrada in entradas.find():
+        total += entrada["total"]
+
+    print(f"Total vendido: {total}")

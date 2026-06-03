@@ -1,6 +1,6 @@
 from conexion import db
 
-funciones = db["funciones"]
+funciones = db["Funciones"]
 
 
 def agregar_funcion():
