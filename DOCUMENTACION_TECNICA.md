@@ -1,19 +1,42 @@
 # Documentación Técnica - Cine-DB
 
+## Tabla de Contenidos
+
+- [Descripción General](#descripción-general)
+- [Diseño de la Base de Datos](#diseño-de-la-base-de-datos)
+- [Colecciones](#colecciones)
+- [Funcionalidades del Sistema](#funcionalidades-del-sistema)
+- [Interfaz Gráfica (Tkinter)](#interfaz-gráfica-tkinter)
+- [Flujo de Trabajo del Sistema](#flujo-de-trabajo-del-sistema)
+- [Dependencias del Sistema](#dependencias-del-sistema)
+- [Archivos del Proyecto](#archivos-del-proyecto)
+- [Notas Importantes](#notas-importantes)
+
 ## Descripción General
+<details>
+<summary> Ver Descripción General</summary>
+
 Cine-DB es un sistema de gestión de cine desarrollado en Python con interfaz gráfica Tkinter y base de datos MongoDB. El sistema permite la gestión de películas, funciones, usuarios y ventas de entradas.
+</details>
+
 
 ---
 
 ## Diseño de la Base de Datos
+<details>
+<summary> Ver Diseño de la Base de Datos</summary>
 
 ### Tecnología
 - **Motor de Base de Datos**: MongoDB
 - **Conexión**: mongodb://localhost:27017/
 - **Nombre de la Base de Datos**: Cine-DB
 - **Lenguaje del backend**: Python
+</details>
+
 
 ### Colecciones
+<details>
+<summary> Ver Colecciones</summary>
 
 #### 1. Colección: `usuarios`
 Almacena la información de los usuarios del sistema.
@@ -41,6 +64,8 @@ Almacena la información de los usuarios del sistema.
 - `password`: Contraseña del usuario
 - `preferencias`: Array de preferencias del usuario
 - `historial_compras`: Array con el historial de compras del usuario
+</details>
+
 
 **Estructura de historial_compras:**
 ```json
@@ -150,6 +175,8 @@ Almacena las entradas vendidas a los usuarios.
 ---
 
 ## Funcionalidades del Sistema
+<details>
+<summary> Ver Funcionalidades del Sistema</summary>
 
 ### Módulo de Usuarios (Usuarios.py)
 
@@ -285,8 +312,11 @@ Almacena las entradas vendidas a los usuarios.
 - **Retorno**: Array con el historial formateado
 
 ---
+</details>
 
 ## Interfaz Gráfica (Tkinter)
+<details>
+<summary>Ver Interfaz Gráfica (Tkinter)</summary>
 
 ### Estructura de Vistas
 
@@ -373,8 +403,11 @@ Almacena las entradas vendidas a los usuarios.
   - Actualizar información personal
 
 ---
+</details>
 
 ## Flujo de Trabajo del Sistema
+<details>
+<summary>Ver Flujo de Trabajo del Sistema</summary>
 
 ### Flujo de Administrador
 1. Login con credenciales de administrador (admin/1234)
@@ -406,8 +439,11 @@ Almacena las entradas vendidas a los usuarios.
 7. Gestionar preferencias personales
 
 ---
+</details>
 
 ## Dependencias del Sistema
+<details>
+<summary>Ver Dependencias y Requisitos</summary>
 
 ### Python Packages
 - `pymongo`: Driver de MongoDB para Python
@@ -419,8 +455,11 @@ Almacena las entradas vendidas a los usuarios.
 - Sistema operativo compatible con Tkinter
 
 ---
+</details>
 
 ## Archivos del Proyecto
+<details>
+<summary>Ver Estructura de Directorios</summary>
 
 ```
 Cine-DB/
@@ -430,7 +469,6 @@ Cine-DB/
 ├── Peliculas.py               # Lógica de gestión de películas
 ├── Funciones.py               # Lógica de gestión de funciones
 ├── Entradas.py                # Lógica de gestión de entradas
-├── Funciones.py               # Lógica de gestión de funciones
 ├── views/                     # Directorio de vistas GUI
 │   ├── main_window.py         # Ventana principal
 │   ├── login_view.py          # Páginas de login
@@ -450,8 +488,12 @@ Cine-DB/
 ```
 
 ---
+</details>
+
 
 ## Notas Importantes
+<details>
+<summary>Ver Notas de Seguridad, Validaciones y Errores</summary>
 
 ### Seguridad
 - Las contraseñas se almacenan en texto plano (no recomendado para producción)
@@ -475,6 +517,7 @@ Cine-DB/
 - Se validan formatos de IDs antes de operaciones CRUD
 
 ---
+</details>
 
 ## Fecha de Documentación
 Junio 2026
