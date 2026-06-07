@@ -357,7 +357,7 @@ Almacena las entradas vendidas a los usuarios.
   - Módulo Administrador
   - Módulo Usuario
 
-![LoginPage](capturas/general/LoginPage g-.png){width=700}
+<img src="capturas/general/LoginPage g-.png" width="700">
 
 ##### AdminLoginPage
 - **Descripción**: Login para administradores
@@ -366,7 +366,7 @@ Almacena las entradas vendidas a los usuarios.
   - Contraseña: 1234
 - **Redirección**: AdminDashboard al login exitoso
 
-![Admin Login](capturas/general/AdminLoginPage g-.png){width=600}
+<img src="capturas/general/AdminLoginPage g-.png" width="600">
 
 #### 3. Vistas de Administrador (views/admin/)
 
@@ -374,7 +374,7 @@ Almacena las entradas vendidas a los usuarios.
 - **Descripción**: Panel principal del administrador
 - **Funcionalidades**: Acceso a los módulos de gestión
 
-![Admin Dashboard](capturas/general/Admin Dashboard g-.png){width=700}
+<img src="capturas/general/Admin Dashboard g-.png" width="700">
 
 ##### Gestión de Usuarios (user_management_view.py)
 - **Funcionalidades**:
@@ -383,7 +383,7 @@ Almacena las entradas vendidas a los usuarios.
   - Actualizar usuarios
   - Eliminar usuarios
 
-![Gestión de Usuarios](capturas/admin/Gestión de Usuarios a-.png){width=800}
+<img src="capturas/admin/Gestión de Usuarios a-.png" width="800">
 
 ##### Gestión de Películas (movie_management_view.py)
 - **Funcionalidades**:
@@ -392,7 +392,7 @@ Almacena las entradas vendidas a los usuarios.
   - Actualizar películas
   - Eliminar películas
 
-![Gestión de Películas](capturas/admin/Gestión de Películas a-.png){width=800}
+<img src="capturas/admin/Gestión de Películas a-.png" width="800">
 
 ##### Gestión de Funciones (function_management_view.py)
 - **Funcionalidades**:
@@ -400,7 +400,7 @@ Almacena las entradas vendidas a los usuarios.
   - Listar funciones
   - Ver funciones disponibles
 
-![Gestión de Funciones](capturas/admin/Gestión de Funciones a-.png){width=800}
+<img src="capturas/admin/Gestión de Funciones a-.png" width="800">
 
 #### 4. Vistas de Usuario (views/user/)
 
@@ -409,20 +409,20 @@ Almacena las entradas vendidas a los usuarios.
 - **Autenticación**: Usa función `login_usuario` de Usuarios.py
 - **Redirección**: UserDashboard al login exitoso
 
-![User Login Page](capturas/general/User Login Page g-.png){width=700}
+<img src="capturas/general/User Login Page g-.png" width="700">
 
 ##### User Dashboard (user_dashboard_view.py)
 - **Descripción**: Panel principal del usuario
 - **Funcionalidades**: Acceso a las opciones del usuario
 
-![User Dashboard](capturas/general/User Dashboard g-.png){width=700}
+<img src="capturas/general/User Dashboard g-.png" width="700">
 
 ##### Ver Películas (view_movies_view.py)
 - **Funcionalidades**:
   - Listar todas las películas disponibles
   - Ver detalles de películas
 
-![Mostrar Película](capturas/admin/Mostrar pelicula a-.png){width=600}
+<img src="capturas/admin/Mostrar pelicula a-.png" width="600">
 
 ##### Comprar Entradas (buy_tickets_view.py)
 - **Funcionalidades**:
@@ -432,7 +432,7 @@ Almacena las entradas vendidas a los usuarios.
   - Procesar compra
   - Validar disponibilidad de asientos
 
-![Comprar Entradas](capturas/usuarios/comprar entrada u-.png){width=600}
+<img src="capturas/usuarios/comprar entrada u-.png" width="600">
 
 ##### Historial de Compras (purchase_history_view.py)
 - **Funcionalidades**:
@@ -440,18 +440,15 @@ Almacena las entradas vendidas a los usuarios.
   - Mostrar detalles de cada compra
   - Formateo de fechas
 
-![Historial de Compras - Vista](capturas/usuarios/Obtener Historial de Usuario u-.png){width=800}
+<img src="capturas/usuarios/Obtener Historial de Usuario u-.png" width="800">
 
 ##### Preferencias (preferences_view.py)
 - **Funcionalidades**:
   - Gestionar preferencias del usuario
   - Actualizar información personal
 
-![Preferencias](capturas/usuarios/Preferencias u-.png){width=500}
-  - Gestionar preferencias del usuario
-  - Actualizar información personal
+<img src="capturas/usuarios/Preferencias u-.png" width="500">
 
----
 </details>
 
 ## Flujo de Trabajo del Sistema
