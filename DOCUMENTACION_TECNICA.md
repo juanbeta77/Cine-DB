@@ -275,12 +275,7 @@ Almacena las entradas vendidas a los usuarios.
 - **Descripción**: Lista todas las entradas vendidas
 - **Parámetro opcional**: `return_list` - Si es True, retorna la lista en lugar de imprimirla
 
-#### 3. Total de Ventas
-- **Función**: `total_ventas()`
-- **Descripción**: Calcula el total de ventas de entradas
-- **Retorno**: Suma total de todas las entradas vendidas
-
-#### 4. Obtener Historial de Usuario (Entradas)
+#### 3. Obtener Historial de Usuario (Entradas)
 - **Función**: `obtener_historial_usuario(user_id)`
 - **Descripción**: Obtiene el historial de compras formateado de un usuario
 - **Características**:
