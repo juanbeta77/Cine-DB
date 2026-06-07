@@ -447,6 +447,12 @@ Almacena las entradas vendidas a los usuarios.
   - Especificar cantidad de entradas
   - Procesar compra
   - Validar disponibilidad de asientos
+  - Generar recibo de compra: Al realizar una compra exitosa, se genera  un recibo que se guarda como un archivo de texto. El recibo incluye:
+   - Fecha/Hora de la compra
+   - ID de la función
+   - Título de la película
+   - Cantidad de boletos
+   - Total pagado
 
 <img src="capturas/usuarios/comprar entrada u-.png" width="600">
 <img src="capturas/usuarios/comprar entrada confirmacion -u.png" width="600">
