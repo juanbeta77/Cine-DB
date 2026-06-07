@@ -64,7 +64,6 @@ Almacena la información de los usuarios del sistema.
 - `password`: Contraseña del usuario
 - `preferencias`: Array de preferencias del usuario
 - `historial_compras`: Array con el historial de compras del usuario
-</details>
 
 
 **Estructura de historial_compras:**
@@ -173,6 +172,7 @@ Almacena las entradas vendidas a los usuarios.
 - `fecha_compra`: Fecha y hora de la compra
 
 ---
+</details>
 
 ## Funcionalidades del Sistema
 <details>
