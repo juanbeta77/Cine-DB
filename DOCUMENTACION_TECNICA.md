@@ -197,7 +197,6 @@ Almacena las entradas vendidas a los usuarios.
 - **Parámetro opcional**: `return_list` - Si es True, retorna la lista en lugar de imprimirla
 - **Nota**: Excluye el campo password de la visualización
 
-<img src="capturas/admin/Mostrar Usuario a-.png" width="800">
 
 #### 3. Actualizar Usuario
 - **Función**: `actualizar_usuario_por_documento(documento, nuevo_telefono, nuevo_correo)`
@@ -287,7 +286,7 @@ Almacena las entradas vendidas a los usuarios.
 - **Característica**: Incluye el título de la película (join con colección Peliculas)
 - **Parámetro opcional**: `return_list` - Si es True, retorna la lista en lugar de imprimirla
 
-<img src="capturas/admin/mostrar funcones a-.png" width="800">
+
 
 #### 3. Obtener Funciones Disponibles
 - **Función**: `get_funciones_disponibles()`
