@@ -85,11 +85,6 @@ def mostrar_entradas(return_list=False):
             Total: {entrada.get('total')}
             """)
         
-def total_ventas():
-    total = 0
-    for entrada in entradas.find():
-        total += entrada.get("total", 0)
-    return total
 
 def obtener_historial_usuario(user_id):
 
