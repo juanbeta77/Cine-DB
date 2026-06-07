@@ -187,11 +187,17 @@ Almacena las entradas vendidas a los usuarios.
   - Verifica que no exista un usuario con el mismo correo (case-insensitive)
 - **Retorno**: Mensaje de éxito o error
 
+**Ejemplo de la interfaz - Crear Usuario:**
+
+![Crear Usuario](capturas/admin/Crear Usuario a-.png){width=600}
+
 #### 2. Mostrar Usuarios
 - **Función**: `mostrar_usuarios(return_list=False)`
 - **Descripción**: Lista todos los usuarios del sistema
 - **Parámetro opcional**: `return_list` - Si es True, retorna la lista en lugar de imprimirla
 - **Nota**: Excluye el campo password de la visualización
+
+![Mostrar Usuarios](capturas/admin/Mostrar Usuario a-.png){width=800}
 
 #### 3. Actualizar Usuario
 - **Función**: `actualizar_usuario_por_documento(documento, nuevo_telefono, nuevo_correo)`
@@ -210,6 +216,10 @@ Almacena las entradas vendidas a los usuarios.
 - **Parámetro**: ID del usuario
 - **Retorno**: Array con el historial de compras
 
+**Ejemplo - Historial de Usuario:**
+
+![Historial Usuario](capturas/usuarios/Obtener Historial de Usuario u-.png){width=800}
+
 #### 6. Login de Usuario
 - **Función**: `login_usuario(correo, password)`
 - **Descripción**: Autentica un usuario en el sistema
@@ -227,6 +237,10 @@ Almacena las entradas vendidas a los usuarios.
   - Verifica que no exista una película con el mismo título (case-insensitive)
   - Valida que la duración sea un número entero
 - **Retorno**: Mensaje de éxito o error
+
+**Ejemplo de la interfaz - Agregar Película:**
+
+![Agregar Película](capturas/admin/Agregar pelicula a-.png){width=500}
 
 #### 2. Mostrar Películas
 - **Función**: `mostrar_peliculas(return_list=False)`
@@ -263,16 +277,26 @@ Almacena las entradas vendidas a los usuarios.
   - Verifica que no exista una función duplicada (misma película, sala y horario)
 - **Retorno**: Mensaje de éxito o error
 
+**Ejemplo de la interfaz - Agregar Función:**
+
+![Agregar Función](capturas/admin/Agregar funcion a-.png){width=500}
+
 #### 2. Mostrar Funciones
 - **Función**: `mostrar_funciones(return_list=False)`
 - **Descripción**: Lista todas las funciones programadas
 - **Característica**: Incluye el título de la película (join con colección Peliculas)
 - **Parámetro opcional**: `return_list` - Si es True, retorna la lista en lugar de imprimirla
 
+![Mostrar Funciones](capturas/admin/mostrar funcones a-.png){width=800}
+
 #### 3. Obtener Funciones Disponibles
 - **Función**: `get_funciones_disponibles()`
 - **Descripción**: Obtiene todas las funciones con asientos disponibles
 - **Retorno**: Lista de funciones con asientos_disponibles > 0
+
+**Ejemplo - Funciones disponibles en la vista de usuario:**
+
+![Funciones Disponibles](capturas/usuarios/Obtener Funciones Disponibles u-.png){width=700}
 
 #### 4. Obtener Función por ID
 - **Función**: `get_funcion_by_id(funcion_id)`
@@ -333,6 +357,8 @@ Almacena las entradas vendidas a los usuarios.
   - Módulo Administrador
   - Módulo Usuario
 
+![LoginPage](capturas/general/LoginPage g-.png){width=700}
+
 ##### AdminLoginPage
 - **Descripción**: Login para administradores
 - **Credenciales por defecto**:
@@ -340,11 +366,15 @@ Almacena las entradas vendidas a los usuarios.
   - Contraseña: 1234
 - **Redirección**: AdminDashboard al login exitoso
 
+![Admin Login](capturas/general/AdminLoginPage g-.png){width=600}
+
 #### 3. Vistas de Administrador (views/admin/)
 
 ##### Admin Dashboard (admin_dashboard_view.py)
 - **Descripción**: Panel principal del administrador
 - **Funcionalidades**: Acceso a los módulos de gestión
+
+![Admin Dashboard](capturas/general/Admin Dashboard g-.png){width=700}
 
 ##### Gestión de Usuarios (user_management_view.py)
 - **Funcionalidades**:
@@ -353,6 +383,8 @@ Almacena las entradas vendidas a los usuarios.
   - Actualizar usuarios
   - Eliminar usuarios
 
+![Gestión de Usuarios](capturas/admin/Gestión de Usuarios a-.png){width=800}
+
 ##### Gestión de Películas (movie_management_view.py)
 - **Funcionalidades**:
   - Agregar películas
@@ -360,11 +392,15 @@ Almacena las entradas vendidas a los usuarios.
   - Actualizar películas
   - Eliminar películas
 
+![Gestión de Películas](capturas/admin/Gestión de Películas a-.png){width=800}
+
 ##### Gestión de Funciones (function_management_view.py)
 - **Funcionalidades**:
   - Agregar funciones
   - Listar funciones
   - Ver funciones disponibles
+
+![Gestión de Funciones](capturas/admin/Gestión de Funciones a-.png){width=800}
 
 #### 4. Vistas de Usuario (views/user/)
 
@@ -373,14 +409,20 @@ Almacena las entradas vendidas a los usuarios.
 - **Autenticación**: Usa función `login_usuario` de Usuarios.py
 - **Redirección**: UserDashboard al login exitoso
 
+![User Login Page](capturas/general/User Login Page g-.png){width=700}
+
 ##### User Dashboard (user_dashboard_view.py)
 - **Descripción**: Panel principal del usuario
 - **Funcionalidades**: Acceso a las opciones del usuario
+
+![User Dashboard](capturas/general/User Dashboard g-.png){width=700}
 
 ##### Ver Películas (view_movies_view.py)
 - **Funcionalidades**:
   - Listar todas las películas disponibles
   - Ver detalles de películas
+
+![Mostrar Película](capturas/admin/Mostrar pelicula a-.png){width=600}
 
 ##### Comprar Entradas (buy_tickets_view.py)
 - **Funcionalidades**:
@@ -390,14 +432,22 @@ Almacena las entradas vendidas a los usuarios.
   - Procesar compra
   - Validar disponibilidad de asientos
 
+![Comprar Entradas](capturas/usuarios/comprar entrada u-.png){width=600}
+
 ##### Historial de Compras (purchase_history_view.py)
 - **Funcionalidades**:
   - Ver historial de compras del usuario
   - Mostrar detalles de cada compra
   - Formateo de fechas
 
+![Historial de Compras - Vista](capturas/usuarios/Obtener Historial de Usuario u-.png){width=800}
+
 ##### Preferencias (preferences_view.py)
 - **Funcionalidades**:
+  - Gestionar preferencias del usuario
+  - Actualizar información personal
+
+![Preferencias](capturas/usuarios/Preferencias u-.png){width=500}
   - Gestionar preferencias del usuario
   - Actualizar información personal
 
