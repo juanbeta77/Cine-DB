@@ -189,7 +189,7 @@ Almacena las entradas vendidas a los usuarios.
 
 **Ejemplo de la interfaz - Crear Usuario:**
 
-![Crear Usuario](capturas/admin/Crear Usuario a-.png){width=600}
+<img src="capturas/admin/Crear Usuario a-.png" width="600">
 
 #### 2. Mostrar Usuarios
 - **Función**: `mostrar_usuarios(return_list=False)`
@@ -197,7 +197,7 @@ Almacena las entradas vendidas a los usuarios.
 - **Parámetro opcional**: `return_list` - Si es True, retorna la lista en lugar de imprimirla
 - **Nota**: Excluye el campo password de la visualización
 
-![Mostrar Usuarios](capturas/admin/Mostrar Usuario a-.png){width=800}
+<img src="capturas/admin/Mostrar Usuario a-.png" width="800">
 
 #### 3. Actualizar Usuario
 - **Función**: `actualizar_usuario_por_documento(documento, nuevo_telefono, nuevo_correo)`
@@ -218,7 +218,7 @@ Almacena las entradas vendidas a los usuarios.
 
 **Ejemplo - Historial de Usuario:**
 
-![Historial Usuario](capturas/usuarios/Obtener Historial de Usuario u-.png){width=800}
+<img src="capturas/usuarios/Obtener Historial de Usuario u-.png" width="800">
 
 #### 6. Login de Usuario
 - **Función**: `login_usuario(correo, password)`
@@ -240,7 +240,7 @@ Almacena las entradas vendidas a los usuarios.
 
 **Ejemplo de la interfaz - Agregar Película:**
 
-![Agregar Película](capturas/admin/Agregar pelicula a-.png){width=500}
+<img src="capturas/admin/Agregar pelicula a-.png" width="500">
 
 #### 2. Mostrar Películas
 - **Función**: `mostrar_peliculas(return_list=False)`
@@ -279,7 +279,7 @@ Almacena las entradas vendidas a los usuarios.
 
 **Ejemplo de la interfaz - Agregar Función:**
 
-![Agregar Función](capturas/admin/Agregar funcion a-.png){width=500}
+<img src="capturas/admin/Agregar funcion a-.png" width="500">
 
 #### 2. Mostrar Funciones
 - **Función**: `mostrar_funciones(return_list=False)`
@@ -287,7 +287,7 @@ Almacena las entradas vendidas a los usuarios.
 - **Característica**: Incluye el título de la película (join con colección Peliculas)
 - **Parámetro opcional**: `return_list` - Si es True, retorna la lista en lugar de imprimirla
 
-![Mostrar Funciones](capturas/admin/mostrar funcones a-.png){width=800}
+<img src="capturas/admin/mostrar funcones a-.png" width="800">
 
 #### 3. Obtener Funciones Disponibles
 - **Función**: `get_funciones_disponibles()`
@@ -296,7 +296,7 @@ Almacena las entradas vendidas a los usuarios.
 
 **Ejemplo - Funciones disponibles en la vista de usuario:**
 
-![Funciones Disponibles](capturas/usuarios/Obtener Funciones Disponibles u-.png){width=700}
+<img src="capturas/usuarios/Obtener Funciones Disponibles u-.png" width="700">
 
 #### 4. Obtener Función por ID
 - **Función**: `get_funcion_by_id(funcion_id)`
