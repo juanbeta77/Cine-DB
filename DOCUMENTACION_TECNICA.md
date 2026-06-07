@@ -333,6 +333,7 @@ Almacena las entradas vendidas a los usuarios.
   1. Crea el documento de entrada
   2. Agrega la compra al historial del usuario
   3. Actualiza los asientos disponibles de la función
+  4. **Generación de Recibo**: Al realizar una compra exitosa, se genera un recibo que se guarda como un archivo txt y se notifica al usuario con un mensaje.
 - **Retorno**: "exito" o mensaje de error
 
 #### 2. Mostrar Entradas
@@ -451,6 +452,7 @@ Almacena las entradas vendidas a los usuarios.
 <img src="capturas/usuarios/comprar entrada confirmacion -u.png" width="600">
 <img src="capturas/usuarios/comprar entrada pasarela -u.png" width="600">
 <img src="capturas\usuarios\comprar entrada exitoso -u.png" width="600">
+<img src="capturas/usuarios/recibo compra -u.png" width="600">
 
 ##### Historial de Compras (purchase_history_view.py)
 - **Funcionalidades**:
