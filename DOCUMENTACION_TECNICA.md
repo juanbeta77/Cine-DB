@@ -204,10 +204,18 @@ Almacena las entradas vendidas a los usuarios.
 - **Parámetros**: Documento de identidad y nuevos valores (opcionales)
 - **Retorno**: Mensaje de éxito o error
 
+**Ejemplo de la interfaz - Actualizar Usuario:**
+
+<img src="capturas/admin/actualizar Usuario a-.png" width="600">
+
 #### 4. Eliminar Usuario
 - **Función**: `eliminar_usuario_por_documento(documento)`
 - **Descripción**: Elimina un usuario por su documento de identidad
 - **Retorno**: Mensaje de éxito o error
+
+**Ejemplo de la interfaz - Eliminar Usuario:**
+
+<img src="capturas\admin\eliminar usuario -a.png" width="600">
 
 #### 5. Obtener Historial de Usuario
 - **Función**: `obtener_historial_usuario(user_id)`
@@ -252,11 +260,19 @@ Almacena las entradas vendidas a los usuarios.
 - **Parámetros**: ID o título de la película, nuevo género, nuevo título (opcional)
 - **Retorno**: Mensaje de éxito o error
 
+**Ejemplo - Actualizar Película:**
+
+<img src="capturas\admin\actuallizar pelicula -a.png" width="500">
+
 #### 4. Eliminar Película
 - **Función**: `eliminar_pelicula_por_id(id_o_titulo)`
 - **Descripción**: Elimina una película por ID o título
 - **Parámetros**: ID (24 caracteres) o título de la película
 - **Retorno**: Mensaje de éxito o error
+
+**Ejemplo - Eliminar Película:**
+
+<img src="capturas\admin\eliminar pelicula a-.png" width="500">
 
 #### 5. Obtener Película por ID
 - **Función**: `get_pelicula_by_id(pelicula_id)`
@@ -432,6 +448,9 @@ Almacena las entradas vendidas a los usuarios.
   - Validar disponibilidad de asientos
 
 <img src="capturas/usuarios/comprar entrada u-.png" width="600">
+<img src="capturas/usuarios/comprar entrada confirmacion -u.png" width="600">
+<img src="capturas/usuarios/comprar entrada pasarela -u.png" width="600">
+<img src="capturas\usuarios\comprar entrada exitoso -u.png" width="600">
 
 ##### Historial de Compras (purchase_history_view.py)
 - **Funcionalidades**:
