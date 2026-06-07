@@ -1,113 +1,126 @@
 from conexion import db
 from datetime import datetime
+from bson.objectid import ObjectId
 
 entradas = db["Entradas"]
 funciones = db["Funciones"]
+usuarios = db["usuarios"]
+peliculas = db["Peliculas"]
 
+def comprar_entrada(user_id, funcion_id, cantidad, precio_total):
+ 
+    try:
+        obj_funcion_id = ObjectId(str(funcion_id))
+        obj_user_id = ObjectId(str(user_id))
+    except Exception:
+        return "Error: Formato de ID inválido para la función o el usuario."
 
-def comprar_entrada():
+    funcion = funciones.find_one({"_id": obj_funcion_id})
+    if not funcion:
+        return "Error: La función seleccionada ya no existe."
 
-    pelicula = input("Pelicula: ")
-    horario = input("Horario: ")
-    cantidad = int(input("Cantidad entradas: "))
-    usuario = input("Nombre usuario: ")
+    asientos_disponibles = funcion.get("asientos_disponibles", 0)
+    if asientos_disponibles < cantidad:
+        return f"Error: No hay suficientes asientos disponibles. Quedan {asientos_disponibles}."
 
-    funcion = funciones.find_one({
-        "pelicula": pelicula,
-        "horario": horario
-    })
+    pelicula = peliculas.find_one({"_id": ObjectId(funcion["pelicula_id"])})
+    titulo_pelicula = pelicula["titulo"] if pelicula else "Película Desconocida"
 
-    if funcion:
+    usuario_doc = usuarios.find_one({"_id": obj_user_id})
+    nombre_usuario = usuario_doc["nombre"] if usuario_doc else "Usuario Desconocido"
 
-        if funcion["asientos_disponibles"] >= cantidad:
+    entrada = {
+        "usuario_id": str(obj_user_id),
+        "usuario_nombre": nombre_usuario,
+        "funcion_id": str(obj_funcion_id),
+        "pelicula_titulo": titulo_pelicula,
+        "horario": funcion.get("horario"),
+        "sala": funcion.get("sala"),
+        "cantidad": cantidad,
+        "total": precio_total,
+        "fecha_compra": datetime.now()
+    }
 
-            total = cantidad * funcion["precio"]
+    entradas.insert_one(entrada)  
 
-            entrada = {
-                "usuario": usuario,
-                "pelicula": pelicula,
-                "horario": horario,
-                "cantidad": cantidad,
-                "total": total,
-                "fecha_compra": datetime.now()
+    usuarios.update_one(
+        {"_id": obj_user_id},
+        {
+            "$push": {
+                "historial_compras": {
+                    "entrada_id": str(entrada["_id"]),
+                    "pelicula": titulo_pelicula,
+                    "cantidad": cantidad,
+                    "total": precio_total,
+                    "fecha": datetime.now()
+                }
             }
+        }
+    )
 
-            entradas.insert_one(entrada)  
-            usuarios = db["usuarios"]
+    nuevos_asientos = asientos_disponibles - cantidad
+    funciones.update_one(
+        {"_id": obj_funcion_id},
+        {"$set": {"asientos_disponibles": nuevos_asientos}}
+    )
 
-            usuarios.update_one(
-                {"nombre": usuario},
-                {
-                    "$push": {
-                        "historial_compras": {
-                            "pelicula": pelicula,
-                            "cantidad": cantidad,
-                            "total": total,
-                            "fecha": datetime.now()
-                        }
-                    }
-                }
-            )
-
-            nuevos_asientos = funcion["asientos_disponibles"] - cantidad
-
-            funciones.update_one(
-                {
-                    "pelicula": pelicula,
-                    "horario": horario
-                },
-                {
-                    "$set": {
-                        "asientos_disponibles": nuevos_asientos
-                    }
-                }
-            )
+    return "exito"
 
 
-
-
-            print(f"""
-======== RECIBO ========
-
-Usuario: {usuario}
-Pelicula: {pelicula}
-Horario: {horario}
-Cantidad entradas: {cantidad}
-Total pagado: {total}
-
-========================
-""")
-            print(f"""
-Compra realizada correctamente
-Total pagado: {total}
-""")
-
-        else:
-            print("No hay suficientes asientos")
-
-    else:
-        print("Funcion no encontrada")
-
-
-def mostrar_entradas():
-
+def mostrar_entradas(return_list=False):
     print("\nLISTA DE ENTRADAS\n")
+    
+    entradas_list = list(entradas.find({}))
 
-    for entrada in entradas.find():
+    if return_list:
+        return entradas_list
 
+    for entrada in entradas_list:
         print(f"""
-Usuario: {entrada['usuario']}
-Pelicula: {entrada['pelicula']}
-Horario: {entrada['horario']}
-Cantidad: {entrada['cantidad']}
-Total: {entrada['total']}
-""")
+            Usuario: {entrada.get('usuario_nombre')}
+            Pelicula: {entrada.get('pelicula_titulo')}
+            Horario: {entrada.get('horario')}
+            Sala: {entrada.get('sala')}
+            Cantidad: {entrada.get('cantidad')}
+            Total: {entrada.get('total')}
+            """)
         
-def total_ventas():
 
-    total = 0
+def obtener_historial_usuario(user_id):
 
-    for entrada in entradas.find():
-        total += entrada["total"]
+    try:
+        obj_user_id = ObjectId(str(user_id))
+    except Exception:
+        print("Error: El ID del usuario no tiene un formato válido.")
+        return []
 
-    print(f"Total vendido: {total}")
+    try:
+        usuario_doc = usuarios.find_one({"_id": obj_user_id}, {"historial_compras": 1})
+        
+        if usuario_doc and "historial_compras" in usuario_doc:
+            historial = usuario_doc["historial_compras"]
+            
+            historial_limpio = []
+            for item in historial:
+                fecha_str = item.get("fecha")
+                if isinstance(fecha_str, datetime):
+                    fecha_str = fecha_str.strftime("%d/%m/%Y %H:%M")
+                elif not fecha_str:
+                    fecha_str = "N/A"
+
+                historial_limpio.append({
+                    "id_compra": item.get("entrada_id", "N/A"),
+                    "pelicula": item.get("pelicula", "Sin Título"),
+                    "sala": "-",  
+                    "horario": "-", 
+                    "cantidad": item.get("cantidad", 0),
+                    "total": item.get("total", 0.0),
+                    "fecha_compra": fecha_str
+                })
+            
+            return list(reversed(historial_limpio))
+            
+        return []
+    except Exception as e:
+        print(f"Error al extraer historial del usuario: {e}")
+        return []

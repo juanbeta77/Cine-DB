@@ -1,0 +1,11 @@
+========================================
+           CINE-DB - RECIBO DE COMPRA   
+========================================
+Fecha/Hora:   07/06/2026 11:51:12
+ID Función:   6a24795d76d4273ae3fa16b3
+Película:     Mortal Kombat
+Cantidad:     1 boletos
+Total Pagado: $6,000.00
+========================================
+   ¡Gracias por su compra! Disfrute.    
+========================================

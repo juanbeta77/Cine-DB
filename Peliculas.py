@@ -1,72 +1,95 @@
+from bson.objectid import ObjectId
 from conexion import db
 
 peliculas = db["Peliculas"]
 
-
-def agregar_pelicula():
-
-    titulo = input("Titulo: ")
-    genero = input("Genero: ")
-    duracion = int(input("Duracion: "))
-    clasificacion = input("Clasificacion: ")
-
-    existe = peliculas.find_one({"titulo": titulo})
+def agregar_pelicula(titulo, genero, duracion, clasificacion):
+    existe = peliculas.find_one({"titulo": {"$regex": f"^{titulo}$", "$options": "i"}})
 
     if existe:
-        print("La pelicula ya existe")
-        return
+        return "La película ya existe"
 
+    try:
+        duracion_int = int(duracion)
+    except ValueError:
+        return "La duración debe ser un número entero."
 
     pelicula = {
         "titulo": titulo,
         "genero": genero,
-        "duracion": duracion,
+        "duracion": duracion_int,
         "clasificacion": clasificacion,
         "disponible": True
     }
 
     peliculas.insert_one(pelicula)
+    return "Pelicula agregada con éxito"
 
-    print("Pelicula agregada")
 
-
-def mostrar_peliculas():
-
+def mostrar_peliculas(return_list=False):
     print("\nLISTA DE PELICULAS\n")
+    
+    movies = list(peliculas.find({}))
 
-    for pelicula in peliculas.find():
+    if return_list:
+        return movies
 
+    for pelicula in movies:
         print(f"""
-Titulo: {pelicula['titulo']}
-Genero: {pelicula['genero']}
-Duracion: {pelicula['duracion']}
-Clasificacion: {pelicula['clasificacion']}
-""")
+            ID: {pelicula.get('_id')}
+            Titulo: {pelicula.get('titulo')}
+            Genero: {pelicula.get('genero')}
+            Duracion: {pelicula.get('duracion')}
+            Clasificacion: {pelicula.get('clasificacion')}
+            Disponible: {pelicula.get('disponible')}
+            """)
 
 
+def actualizar_pelicula_por_id(id_o_titulo, nuevo_genero, nuevo_titulo=None):
 
-def actualizar_pelicula():
+    if len(str(id_o_titulo)) == 24 and not " " in str(id_o_titulo):
+        try:
+            obj_id = ObjectId(str(id_o_titulo))
+            criterio = {"_id": obj_id}
+        except Exception:
+            criterio = {"titulo": id_o_titulo}
+    else:
+        criterio = {"titulo": id_o_titulo}
 
-    titulo = input("Titulo pelicula: ")
+    campos_a_actualizar = {"genero": nuevo_genero}
+    if nuevo_titulo:
+        campos_a_actualizar["titulo"] = nuevo_titulo
 
-    nuevo_genero = input("Nuevo genero: ")
-
-    peliculas.update_one(
-        {"titulo": titulo},
-        {
-            "$set": {
-                "genero": nuevo_genero
-            }
-        }
-    )
-
-    print("Pelicula actualizada")
+    result = peliculas.update_one(criterio, {"$set": campos_a_actualizar})
+    
+    if result.modified_count > 0:
+        return "Pelicula actualizada con éxito"
+    else:
+        return "Pelicula no encontrada o datos no modificados"
 
 
-def eliminar_pelicula():
+def eliminar_pelicula_por_id(id_o_titulo):
 
-    titulo = input("Titulo pelicula: ")
+    if len(str(id_o_titulo)) == 24 and not " " in str(id_o_titulo):
+        try:
+            obj_id = ObjectId(str(id_o_titulo))
+            criterio = {"_id": obj_id}
+        except Exception:
+            criterio = {"titulo": id_o_titulo}
+    else:
+        criterio = {"titulo": id_o_titulo}
 
-    peliculas.delete_one({"titulo": titulo})
+    result = peliculas.delete_one(criterio)
 
-    print("Pelicula eliminada")
+    if result.deleted_count > 0:
+        return "Pelicula eliminada con éxito"
+    else:
+        return "Pelicula no encontrada"
+
+def get_pelicula_by_id(pelicula_id):
+    
+    try:
+        return peliculas.find_one({"_id": ObjectId(str(pelicula_id))})
+    except Exception as e:
+        print(f"Error al obtener película por ID: {e}")
+        return None

@@ -1,22 +1,18 @@
+from bson.objectid import ObjectId
 from conexion import db
 
-usuarios = db["usuarios"]
+usuarios = db["usuarios"] 
 
 
-def crear_usuario():
-
-    nombre = input("Nombre: ")
-    correo = input("Correo: ")
-    telefono = input("Telefono: ")
-    password = input("Contraseña: ")
-    existe = usuarios.find_one({"correo": correo})
-
-    if existe:
-        print("El usuario ya existe")
-        return
-
+def crear_usuario(documento, nombre, correo, telefono, password):
+    if usuarios.find_one({"documento": str(documento)}):
+        return "Error: Ya existe un usuario con ese documento de identidad"
+        
+    if usuarios.find_one({"correo": {"$regex": f"^{correo}$", "$options": "i"}}):
+        return "El usuario ya existe con ese correo"
 
     usuario = {
+        "documento": str(documento), 
         "nombre": nombre,
         "correo": correo,
         "telefono": telefono,
@@ -24,83 +20,71 @@ def crear_usuario():
         "preferencias": [],
         "historial_compras": []
     }
-
     usuarios.insert_one(usuario)
+    return "Usuario creado con éxito"
 
-    print("Usuario creado")
 
-
-def mostrar_usuarios():
-
+def mostrar_usuarios(return_list=False):
     print("\nLISTA DE USUARIOS\n")
+    
+    users = list(usuarios.find({}, {"password": 0}))
 
-    for usuario in usuarios.find():
+    if return_list:
+        return users
 
+    for usuario in users:
         print(f"""
-Nombre: {usuario['nombre']}
-Correo: {usuario['correo']}
-Telefono: {usuario['telefono']}
-""")
+            ID: {usuario.get('_id')}
+            Nombre: {usuario.get('nombre')}
+            Correo: {usuario.get('correo')}
+            Telefono: {usuario.get('telefono')}
+            """)
 
 
-def actualizar_usuario():
+def actualizar_usuario_por_documento(documento, nuevo_telefono, nuevo_correo):
+    try:
+        campos_a_actualizar = {}
+        
+        if nuevo_telefono: 
+            campos_a_actualizar["telefono"] = nuevo_telefono
+            
+        if nuevo_correo: 
+            campos_a_actualizar["correo"] = nuevo_correo
 
-    correo = input("Correo del usuario: ")
+        resultado = db["usuarios"].update_one(
+            {"documento": documento}, 
+            {"$set": campos_a_actualizar}
+        )
+        
+        if resultado.modified_count > 0:
+            return "Usuario actualizado correctamente."
+        return "El usuario existe pero no se realizaron cambios (los datos eran iguales)."
+        
+    except Exception as e:
+        return f"Error en la base de datos: {e}"  
 
-    nuevo_telefono = input("Nuevo telefono: ")
-
-    usuarios.update_one(
-        {"correo": correo},
-        {"$set": {"telefono": nuevo_telefono}}
-    )
-
-    print("Usuario actualizado")
-
-
-def eliminar_usuario():
-
-    correo = input("Correo del usuario: ")
-
-    usuarios.delete_one({"correo": correo})
-
-    print("Usuario eliminado")
-
-
-def ver_historial_compras():
-
-    nombre = input("Nombre usuario: ")
-
-    usuario = usuarios.find_one({"nombre": nombre})
-
-    if usuario:
-
-        historial = usuario.get("historial_compras", [])
-
-        print("\n===== HISTORIAL COMPRAS =====\n")
-
-        if historial:
-
-            for compra in historial:
-
-                print(f"""
-Pelicula: {compra['pelicula']}
-Cantidad: {compra['cantidad']}
-Total: {compra['total']}
-Fecha: {compra['fecha']}
-""")
-
-        else:
-            print("No hay compras registradas")
-
+def eliminar_usuario_por_documento(documento):
+    result = usuarios.delete_one({"documento": str(documento)})
+    if result.deleted_count > 0:
+        return "Usuario eliminado con éxito"
     else:
-        print("Usuario no encontrado")    
+        return "Usuario no encontrado"
+
+def obtener_historial_usuario(user_id):
+
+    try:
+        obj_id = ObjectId(str(user_id))
+        usuario = usuarios.find_one({"_id": obj_id})
+        
+        if usuario:
+            return usuario.get("historial_compras", [])
+        return []
+    except Exception as e:
+        print(f"Error al obtener historial: {e}")
+        return []
 
 
-
-def login_usuario():
-
-    correo = input("Correo: ")
-    password = input("Contraseña: ")
+def login_usuario(correo, password):
 
     usuario = usuarios.find_one({
         "correo": correo,
@@ -108,11 +92,11 @@ def login_usuario():
     })
 
     if usuario:
-
-        print(f"\nBienvenido {usuario['nombre']}")
-
+        print(f"\nBienvenido {usuario['nombre']} (Desde Interfaz Gráfica)")
+        
+        usuario['id'] = usuario['_id'] 
+        
         return usuario
-
     else:
         print("Credenciales incorrectas")
         return None
