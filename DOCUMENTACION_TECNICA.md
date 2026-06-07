@@ -17,22 +17,20 @@
 <summary> Ver Descripción General</summary>
 
 Cine-DB es un sistema de gestión de cine desarrollado en Python con interfaz gráfica Tkinter y base de datos MongoDB. El sistema permite la gestión de películas, funciones, usuarios y ventas de entradas.
-</details>
-
-
----
-
-## Diseño de la Base de Datos
-<details>
-<summary> Ver Diseño de la Base de Datos</summary>
 
 ### Tecnología
 - **Motor de Base de Datos**: MongoDB
 - **Conexión**: mongodb://localhost:27017/
 - **Nombre de la Base de Datos**: Cine-DB
 - **Lenguaje del backend**: Python
+
 </details>
 
+---
+
+## Diseño de la Base de Datos
+<details>
+<summary> Ver Diseño de la Base de Datos</summary>
 
 ### Colecciones
 <details>
@@ -172,6 +170,7 @@ Almacena las entradas vendidas a los usuarios.
 - `fecha_compra`: Fecha y hora de la compra
 
 ---
+</details>
 </details>
 
 ## Funcionalidades del Sistema
