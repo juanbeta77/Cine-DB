@@ -414,14 +414,14 @@ Almacena las entradas vendidas a los usuarios.
 - **Descripción**: Panel principal del usuario
 - **Funcionalidades**: Acceso a las opciones del usuario
 
-<img src="capturas/general/User Dashboard g-.png" width="700">
+<img src="capturas/usuarios/User Dashboard g-.png" width="700">
 
 ##### Ver Películas (view_movies_view.py)
 - **Funcionalidades**:
   - Listar todas las películas disponibles
   - Ver detalles de películas
 
-<img src="capturas/admin/Mostrar pelicula a-.png" width="600">
+<img src="capturas/usuarios/Obtener Funciones Disponibles u-.png" width="600">
 
 ##### Comprar Entradas (buy_tickets_view.py)
 - **Funcionalidades**:
